@@ -1,6 +1,6 @@
-namespace InnowiseEntryTask.Data;
+namespace InnowiseEntryTask.WebApi.Models;
 
-public class Artist
+public class Artist : IModel
 {
     public int Id { get; set; }
 

@@ -1,6 +1,6 @@
-namespace InnowiseEntryTask.Data;
+namespace InnowiseEntryTask.WebApi.Models;
 
-public class Album
+public class Album : IModel
 {
     public int Id { get; set; }
 

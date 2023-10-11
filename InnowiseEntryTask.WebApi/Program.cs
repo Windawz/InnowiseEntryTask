@@ -1,3 +1,6 @@
+using InnowiseEntryTask.WebApi.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace InnowiseEntryTask.WebApi;
 
 public class Program
@@ -13,13 +16,22 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddDbContext<DatabaseContext>(optionsBuilder =>
+        {
+            optionsBuilder.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
         }
 
         app.UseAuthorization();

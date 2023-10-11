@@ -1,6 +1,6 @@
-namespace InnowiseEntryTask.Data;
+namespace InnowiseEntryTask.WebApi.Models;
 
-public class Song
+public class Song : IModel
 {
     public int Id { get; set; }
 
@@ -8,5 +8,5 @@ public class Song
 
     public int DurationInSeconds { get; set; }
 
-    public Album Album { get; set; } = null!;
+    public Album? Album { get; set; }
 }
