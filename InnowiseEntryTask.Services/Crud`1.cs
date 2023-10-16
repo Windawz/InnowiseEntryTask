@@ -22,6 +22,9 @@ public class Crud<TEntity> where TEntity : class, IEntity
         _dbContext.DbSetOf<TEntity>()
             .FirstOrDefault(entity => entity.Id == id);
 
+    public IReadOnlyCollection<TEntity> ReadAll() =>
+        _dbContext.DbSetOf<TEntity>().ToArray();
+
     public void Update(TEntity value)
     {
         _dbContext.DbSetOf<TEntity>()
