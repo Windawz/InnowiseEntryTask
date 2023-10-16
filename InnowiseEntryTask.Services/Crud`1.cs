@@ -25,11 +25,21 @@ public class Crud<TEntity> where TEntity : class, IEntity
     public IReadOnlyCollection<TEntity> ReadAll() =>
         _dbContext.DbSetOf<TEntity>().ToArray();
 
-    public void Update(TEntity value)
+    public bool Update(TEntity value)
     {
+        var entity = _dbContext.DbSetOf<TEntity>()
+            .FirstOrDefault(entity => entity.Id == value.Id);
+        
+        if (entity is null)
+        {
+            return false;
+        }
+
         _dbContext.DbSetOf<TEntity>()
             .Update(value);
         _dbContext.SaveChanges();
+        
+        return true;
     }
 
     public void Delete(int id)
