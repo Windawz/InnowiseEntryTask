@@ -11,11 +11,12 @@ public class Crud<TEntity> where TEntity : class, IEntity
 
     private readonly ApplicationDbContext _dbContext;
 
-    public void Create(TEntity entity)
+    public int Create(TEntity entity)
     {
         _dbContext.DbSetOf<TEntity>()
             .Add(entity);
         _dbContext.SaveChanges();
+        return entity.Id;
     }
 
     public TEntity? Read(int id) =>
