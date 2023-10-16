@@ -43,7 +43,7 @@ public class Crud<TEntity> where TEntity : class, IEntity
         return true;
     }
 
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         var entity = _dbContext.DbSetOf<TEntity>()
             .FirstOrDefault(entity => entity.Id == id);
@@ -53,6 +53,11 @@ public class Crud<TEntity> where TEntity : class, IEntity
             _dbContext.DbSetOf<TEntity>()
                 .Remove(entity);
             _dbContext.SaveChanges();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
