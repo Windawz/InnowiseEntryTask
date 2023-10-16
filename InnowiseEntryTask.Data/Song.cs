@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 namespace InnowiseEntryTask.Data;
 
 [EntityTypeConfiguration(typeof(SongConfiguration))]
-public class Song
+public class Song : IEntity
 {
     public int Id { get; set; }
 

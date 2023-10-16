@@ -14,7 +14,7 @@ internal static class ApplicationDbContextExtensions
             { typeof(Song), context => context.Songs },
         };
 
-    public static DbSet<TEntity> DbSetOf<TEntity>(this ApplicationDbContext context) where TEntity : class
+    public static DbSet<TEntity> DbSetOf<TEntity>(this ApplicationDbContext context) where TEntity : class, IEntity
     {
         var entityType = typeof(TEntity);
         if (_dbSetGettersPerType.TryGetValue(entityType, out var getter))
@@ -31,7 +31,7 @@ internal static class ApplicationDbContextExtensions
         }
     }
 
-    private static DbSet<TEntity>? FindDbSetAmongProperties<TEntity>(ApplicationDbContext context) where TEntity : class
+    private static DbSet<TEntity>? FindDbSetAmongProperties<TEntity>(ApplicationDbContext context) where TEntity : class, IEntity
     {
         PropertyInfo? propertyInfo = context.GetType()
             .GetProperties()
