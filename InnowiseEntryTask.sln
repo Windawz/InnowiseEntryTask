@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnowiseEntryTask.Data", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnowiseEntryTask.WebApi", "InnowiseEntryTask.WebApi\InnowiseEntryTask.WebApi.csproj", "{5FB46E87-0736-4169-9FCA-7B08F35380B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnowiseEntryTask.Cli", "InnowiseEntryTask.Cli\InnowiseEntryTask.Cli.csproj", "{DC2CFDFA-A5F7-4990-89B7-7DC4ABF59CFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnowiseEntryTask.Services", "InnowiseEntryTask.Services\InnowiseEntryTask.Services.csproj", "{19437168-5A55-45D4-A07B-0E93944196DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +26,9 @@ Global
 		{5FB46E87-0736-4169-9FCA-7B08F35380B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FB46E87-0736-4169-9FCA-7B08F35380B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FB46E87-0736-4169-9FCA-7B08F35380B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC2CFDFA-A5F7-4990-89B7-7DC4ABF59CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC2CFDFA-A5F7-4990-89B7-7DC4ABF59CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC2CFDFA-A5F7-4990-89B7-7DC4ABF59CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC2CFDFA-A5F7-4990-89B7-7DC4ABF59CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19437168-5A55-45D4-A07B-0E93944196DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19437168-5A55-45D4-A07B-0E93944196DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19437168-5A55-45D4-A07B-0E93944196DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19437168-5A55-45D4-A07B-0E93944196DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
