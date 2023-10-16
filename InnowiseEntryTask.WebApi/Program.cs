@@ -1,4 +1,5 @@
 using InnowiseEntryTask.Data;
+using InnowiseEntryTask.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -17,6 +18,8 @@ public class Program
                 ?? throw new InvalidOperationException("Failed to find default connection string");
             options.UseSqlServer(connectionString: connectionString);
         });
+
+        AddServices(builder);
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -53,5 +56,13 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+
+    private static void AddServices(WebApplicationBuilder builder)
+    {
+        builder.Services
+            .AddScoped<Crud<Artist>>()
+            .AddScoped<Crud<Album>>()
+            .AddScoped<Crud<Song>>();
     }
 }
