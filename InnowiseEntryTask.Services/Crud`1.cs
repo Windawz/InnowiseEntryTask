@@ -13,22 +13,22 @@ public class Crud<TEntity> where TEntity : class, IEntity
 
     public int Create(TEntity entity)
     {
-        _dbContext.DbSetOf<TEntity>()
+        _dbContext.Set<TEntity>()
             .Add(entity);
         _dbContext.SaveChanges();
         return entity.Id;
     }
 
     public TEntity? Read(int id) =>
-        _dbContext.DbSetOf<TEntity>()
+        _dbContext.Set<TEntity>()
             .FirstOrDefault(entity => entity.Id == id);
 
     public IReadOnlyCollection<TEntity> ReadAll() =>
-        _dbContext.DbSetOf<TEntity>().ToArray();
+        _dbContext.Set<TEntity>().ToArray();
 
     public bool Update(TEntity value)
     {
-        var entity = _dbContext.DbSetOf<TEntity>()
+        var entity = _dbContext.Set<TEntity>()
             .FirstOrDefault(entity => entity.Id == value.Id);
         
         if (entity is null)
@@ -36,7 +36,7 @@ public class Crud<TEntity> where TEntity : class, IEntity
             return false;
         }
 
-        _dbContext.DbSetOf<TEntity>()
+        _dbContext.Set<TEntity>()
             .Update(value);
         _dbContext.SaveChanges();
         
@@ -45,12 +45,12 @@ public class Crud<TEntity> where TEntity : class, IEntity
 
     public bool Delete(int id)
     {
-        var entity = _dbContext.DbSetOf<TEntity>()
+        var entity = _dbContext.Set<TEntity>()
             .FirstOrDefault(entity => entity.Id == id);
         
         if (entity is not null)
         {
-            _dbContext.DbSetOf<TEntity>()
+            _dbContext.Set<TEntity>()
                 .Remove(entity);
             _dbContext.SaveChanges();
             return true;
