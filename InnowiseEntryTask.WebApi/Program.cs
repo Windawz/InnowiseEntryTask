@@ -1,5 +1,6 @@
 using InnowiseEntryTask.Data;
 using InnowiseEntryTask.Services;
+using InnowiseEntryTask.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -19,7 +20,10 @@ public class Program
             options.UseSqlServer(connectionString: connectionString);
         });
 
-        AddServices(builder);
+        builder.Services
+            .AddScoped<IModelMapper<Song, SongOutputModel>, SongMapper>()
+            .AddScoped<IEntityMapper<SongInputModel, Song>, SongMapper>()
+            .AddScoped<ISongOperator, SongOperator>();
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -56,13 +60,5 @@ public class Program
         app.MapControllers();
 
         app.Run();
-    }
-
-    private static void AddServices(WebApplicationBuilder builder)
-    {
-        builder.Services
-            .AddScoped<Crud<Artist>>()
-            .AddScoped<Crud<Album>>()
-            .AddScoped<Crud<Song>>();
     }
 }

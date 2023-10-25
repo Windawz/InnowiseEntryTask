@@ -1,5 +1,5 @@
-using InnowiseEntryTask.Data;
 using InnowiseEntryTask.Services;
+using InnowiseEntryTask.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnowiseEntryTask.WebApi.Controllers;
@@ -8,56 +8,33 @@ namespace InnowiseEntryTask.WebApi.Controllers;
 [Route("/Songs")]
 public class SongController : ControllerBase
 {
-    public SongController(Crud<Song> crud)
+    public SongController(ISongOperator songOperator)
     {
-        _crud = crud;
+        _songOperator = songOperator;
     }
 
-    private readonly Crud<Song> _crud;
+    private readonly ISongOperator _songOperator;
 
     [HttpPost]
-    public IActionResult Post(Song song)
+    public IActionResult Post(SongInputModel song)
     {
-        _crud.Create(song);
-        return CreatedAtAction(nameof(Get), song);
+        var (id, createdValue) = _songOperator.Add(song);
+        return CreatedAtAction(nameof(Get), new { Id = id }, createdValue);
     }
 
     [HttpGet]
-    public IReadOnlyCollection<Song> GetAll() =>
-        _crud.ReadAll();
+    public IEnumerable<SongOutputModel> GetAll() =>
+        _songOperator.GetAll();
 
     [HttpGet("{id}")]
-    public Song? Get(int id) =>
-        _crud.Read(id);
+    public SongOutputModel? Get(int id) =>
+        _songOperator.Find(id);
 
     [HttpPut("{id}")]
-    public IActionResult Put(int id, Song song)
-    {
-        if (song.Id != id)
-        {
-            song.Id = id;
-        }
-
-        if (_crud.Update(song))
-        {
-            return Ok();
-        }
-        else
-        {
-            return NotFound();
-        }
-    }
+    public IActionResult Put(int id, SongInputModel song) => 
+        _songOperator.TryFindAndSet(id, song) ? Ok() : NotFound();
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
-    {
-        if (_crud.Delete(id))
-        {
-            return Ok();
-        }
-        else
-        {
-            return NotFound();
-        }
-    }
+    public IActionResult Delete(int id) =>
+        _songOperator.TryRemove(id) ? Ok() : NotFound();
 }

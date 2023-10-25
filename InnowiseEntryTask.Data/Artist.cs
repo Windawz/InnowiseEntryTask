@@ -1,6 +1,6 @@
 namespace InnowiseEntryTask.Data;
 
-public class Artist : IEntity
+public class Artist
 {
     public int Id { get; set; }
 

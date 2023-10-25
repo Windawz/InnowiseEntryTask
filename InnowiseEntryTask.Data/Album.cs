@@ -1,6 +1,6 @@
 namespace InnowiseEntryTask.Data;
 
-public class Album : IEntity
+public class Album
 {
     public int Id { get; set; }
 
